@@ -31,10 +31,10 @@ The eighth (last) neighbor who reads the value wakes up the cell so that it can 
 >2. Condition on which all cells that have entered a new value in the state matrix are waiting, >before moving on to the next iteration.
 >3. A key-protected cell counter that has written a new value to the state matrix. The last cell activates the Condition for the next iteration. Take care of the order of taking and releasing the counter key and the condition key.
 
-### Using threads that simulate one cell at a time and synchronizing message lines
+### Using threads that simulate one cell at a time and synchronizing message queues
 >Each thread simulates the operation of one cell in the system. The state of each cell is stored inside the cell (system operation does not rely on a shared state matrix). Cells exchange their status information via the message queue. For the purposes of work analysis, a shared array of state matrices can be introduced (the i-th element of the array is the array of state arrays of the i-th iteration), in which cells write their states (cells cannot read from this array!).
 
-### Using processes that simulate one cell at a time and synchronizing message lines
+### Using processes that simulate one cell at a time and synchronizing message queues
 >Each process simulates the operation of a single cell in the system. The state of each cell is stored inside the cell (system operation does not rely on a shared state matrix). Cells exchange >their status information via the message queue. For the purposes of work analysis, implement a special service (additional process) in which all cells report a new state when changing (where messages contain cell coordinates, iteration number and new state). The service needs to reconstruct and save (or return to the main program) through the state matrix.
 
 ### Using multiple processes through the process pool, generating tasks at the cell set level
